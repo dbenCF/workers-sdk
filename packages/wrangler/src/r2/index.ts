@@ -20,6 +20,7 @@ import {
 	listR2Buckets,
 	putR2Object,
 	usingLocalBucket,
+	isValidR2BucketBinding,
 } from "./helpers";
 import * as Sippy from "./sippy";
 import type { CommonYargsArgv } from "../yargs-types";
@@ -426,6 +427,12 @@ export function r2(r2Yargs: CommonYargsArgv) {
 				},
 				async (args) => {
 					await printWranglerBanner();
+
+					if (!isValidR2BucketBinding(args.name)) {
+						throw new CommandLineArgsError(
+							`The namespace binding name "${args.name}" is invalid. It can only have alphanumeric and _ characters, and cannot begin with a number.`
+						);
+					}
 
 					const config = readConfig(args.config, args);
 
