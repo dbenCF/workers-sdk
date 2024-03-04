@@ -300,7 +300,6 @@ export async function putR2Sippy(
 	);
 }
 
-
 /**
  * R2 bucket names must only contain alphanumeric and - characters.
  */
